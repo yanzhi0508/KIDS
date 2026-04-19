@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ㄅㄆㄇㄈ童裝｜品牌童裝代購</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#0f0f0f;--white:#f8f6f1;--cream:#ede9e0;--sand:#d4c9b4;
+  --warm:#b89a78;--rust:#c4572a;--mid:#6b6560;--card:#1a1816;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+.cursor{position:fixed;width:12px;height:12px;background:var(--warm);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:difference;}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(184,154,120,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 48px;height:68px;display:flex;align-items:center;justify-content:space-between;background:rgba(15,15,15,.9);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.12em;color:var(--white);text-decoration:none;}
+.nav-logo em{color:var(--warm);font-style:normal;}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color .25s;}
+.nav-links a:hover{color:var(--warm);}
+.nav-cta{background:var(--warm);color:var(--black);padding:8px 22px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;font-weight:700;transition:background .25s;}
+.nav-cta:hover{background:var(--white);}
+
+/* HERO */
+.hero{min-height:100vh;padding-top:68px;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;}
+.hero-left{padding:80px 48px 80px 60px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--warm);margin-bottom:32px;}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--warm);}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,9vw,128px);line-height:.92;letter-spacing:.04em;margin-bottom:36px;}
+.hero-title .line-sm{font-size:clamp(40px,5vw,72px);color:var(--warm);display:block;letter-spacing:.1em;}
+.hero-title .line-lg{display:block;}
+.hero-desc{font-size:14px;line-height:2;color:rgba(248,246,241,.55);max-width:380px;margin-bottom:48px;}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;}
+.btn{display:inline-block;padding:14px 32px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;text-decoration:none;cursor:pointer;transition:all .25s;font-family:'Noto Sans TC',sans-serif;border:none;}
+.btn-primary{background:var(--warm);color:var(--black);}
+.btn-primary:hover{background:var(--white);}
+.btn-outline{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.25);}
+.btn-outline:hover{border-color:var(--white);}
+
+.hero-right{position:relative;background:var(--card);overflow:hidden;}
+.hero-bg-text{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:320px;line-height:1;color:rgba(255,255,255,.03);letter-spacing:-.02em;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;animation:drift 20s ease-in-out infinite;}
+@keyframes drift{0%,100%{transform:translate(-50%,-50%) rotate(-3deg);}50%{transform:translate(-48%,-52%) rotate(3deg);}}
+.brands-showcase{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;z-index:2;}
+.brand-row{display:flex;gap:48px;align-items:center;opacity:.7;transition:opacity .3s;}
+.brand-row:hover{opacity:1;}
+.brand-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,3.5vw,48px);letter-spacing:.15em;color:var(--white);border-bottom:2px solid transparent;transition:border-color .3s,color .3s;cursor:default;}
+.brand-name:hover{color:var(--warm);border-color:var(--warm);}
+.brand-divider{width:4px;height:4px;border-radius:50%;background:var(--warm);opacity:.5;}
+.hero-stats{position:absolute;bottom:40px;left:48px;display:flex;gap:48px;z-index:2;}
+.stat{display:flex;flex-direction:column;gap:4px;}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--warm);letter-spacing:.06em;}
+.stat-label{font-size:10px;color:var(--mid);letter-spacing:.2em;text-transform:uppercase;}
+
+/* SECTIONS */
+section{padding:80px 60px;}
+.section-tag{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--warm);display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.section-tag::after{content:'';flex:1;max-width:60px;height:1px;background:var(--warm);}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,6vw,72px);letter-spacing:.06em;line-height:1;margin-bottom:60px;}
+
+/* BRANDS GRID */
+.brands-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.brand-card{background:var(--card);padding:48px 32px;position:relative;overflow:hidden;cursor:pointer;transition:background .35s;border:1px solid rgba(255,255,255,.04);}
+.brand-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .4s ease;}
+.brand-card.nike::after{background:#f05223;}
+.brand-card.jordan::after{background:#cc0001;}
+.brand-card.levis::after{background:#c8102e;}
+.brand-card.converse::after{background:#f5a623;}
+.brand-card:hover{background:#222;}
+.brand-card:hover::after{transform:scaleX(1);}
+.brand-card-label{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--mid);margin-bottom:20px;}
+.brand-card-name{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:.08em;color:var(--white);line-height:1;margin-bottom:16px;transition:color .3s;}
+.brand-card:hover .brand-card-name{color:var(--warm);}
+.brand-card-desc{font-size:12px;line-height:1.9;color:rgba(248,246,241,.4);margin-bottom:28px;}
+.brand-card-items{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{font-size:10px;letter-spacing:.1em;padding:4px 10px;border:1px solid rgba(255,255,255,.12);color:var(--mid);transition:all .25s;}
+.brand-card:hover .tag{border-color:var(--warm);color:var(--warm);}
+
+/* PRODUCTS */
+#products{background:#111;}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.product-card{background:var(--card);overflow:hidden;position:relative;transition:transform .4s ease;}
+.product-card:hover{transform:translateY(-4px);}
+.product-card-img{aspect-ratio:1/1;background:linear-gradient(135deg,#1c1c1c 0%,#2a2826 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.product-icon{font-family:'Bebas Neue',sans-serif;font-size:80px;letter-spacing:.06em;color:rgba(255,255,255,.06);text-align:center;line-height:1;}
+.product-emoji{font-size:64px;position:absolute;transition:transform .4s ease;}
+.product-card:hover .product-emoji{transform:scale(1.15);}
+.product-badge{position:absolute;top:16px;left:16px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;padding:4px 10px;background:var(--warm);color:var(--black);font-weight:700;}
+.product-card-body{padding:24px 28px;}
+.product-brand{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--warm);margin-bottom:8px;}
+.product-name{font-size:15px;font-weight:500;margin-bottom:6px;}
+.product-sub{font-size:12px;color:var(--mid);margin-bottom:16px;}
+.product-footer{display:flex;justify-content:space-between;align-items:center;}
+.product-price{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--white);letter-spacing:.06em;}
+.product-price span{font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--mid);}
+.product-sizes{display:flex;gap:6px;}
+.size{font-size:9px;padding:3px 7px;border:1px solid rgba(255,255,255,.15);color:var(--mid);}
+
+/* PROCESS */
+.process-steps{display:flex;flex-direction:column;gap:2px;margin-top:0;}
+.process-item{display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:40px;background:var(--card);padding:36px 40px;border:1px solid rgba(255,255,255,.04);transition:background .3s;cursor:default;}
+.process-item:hover{background:#1e1c1a;}
+.process-num{font-family:'Bebas Neue',sans-serif;font-size:64px;color:rgba(255,255,255,.08);letter-spacing:.06em;line-height:1;transition:color .3s;}
+.process-item:hover .process-num{color:var(--warm);}
+.process-title{font-size:18px;font-weight:700;margin-bottom:8px;}
+.process-desc{font-size:13px;line-height:1.9;color:var(--mid);}
+.process-arrow{font-size:28px;color:rgba(255,255,255,.1);transition:color .3s,transform .3s;}
+.process-item:hover .process-arrow{color:var(--warm);transform:translateX(6px);}
+
+/* PRICING */
+#pricing{background:#111;}
+.pricing-layout{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.pricing-table{border:1px solid rgba(255,255,255,.06);}
+.pricing-row{display:flex;justify-content:space-between;align-items:center;padding:22px 32px;border-bottom:1px solid rgba(255,255,255,.06);transition:background .25s;}
+.pricing-row:hover{background:rgba(255,255,255,.03);}
+.pricing-row:last-child{border-bottom:none;}
+.pr-label{font-size:13px;color:var(--mid);}
+.pr-val{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.06em;color:var(--white);}
+.pricing-highlight-row{background:var(--warm) !important;}
+.pricing-highlight-row .pr-label{color:var(--black);font-weight:700;}
+.pricing-highlight-row .pr-val{color:var(--black);}
+.pricing-notes{margin-top:2px;background:var(--card);padding:32px;border:1px solid rgba(255,255,255,.06);}
+.note-item{display:flex;gap:14px;font-size:13px;line-height:1.9;color:var(--mid);padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.note-item:last-child{border-bottom:none;}
+.note-item::before{content:'✓';color:var(--warm);flex-shrink:0;font-size:11px;margin-top:4px;}
+.pricing-right{background:var(--warm);padding:60px 48px;display:flex;flex-direction:column;justify-content:center;}
+.pr-right-tag{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(15,15,15,.6);margin-bottom:20px;}
+.pr-right-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,5vw,64px);color:var(--black);line-height:1.05;letter-spacing:.06em;margin-bottom:24px;}
+.guarantee-list{display:flex;flex-direction:column;gap:12px;margin-bottom:40px;}
+.g-item{display:flex;gap:12px;font-size:13px;color:var(--black);font-weight:500;}
+.g-item::before{content:'→';font-weight:700;}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.contact-info{background:var(--card);padding:60px 48px;border:1px solid rgba(255,255,255,.04);}
+.contact-info h3{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:.06em;margin-bottom:12px;}
+.contact-info .subtitle{font-size:13px;color:var(--mid);margin-bottom:48px;line-height:1.8;}
+.info-block{margin-bottom:36px;}
+.info-label{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--warm);margin-bottom:10px;}
+.info-value{font-size:16px;font-weight:500;margin-bottom:4px;}
+.info-sub{font-size:12px;color:var(--mid);}
+.line-cta{display:flex;align-items:center;gap:14px;background:#06c755;color:white;padding:18px 32px;text-decoration:none;font-size:13px;letter-spacing:.1em;font-weight:700;margin-top:40px;width:fit-content;transition:opacity .25s;}
+.line-cta:hover{opacity:.85;}
+.line-cta svg{width:22px;height:22px;fill:white;flex-shrink:0;}
+.contact-form{background:var(--card);padding:60px 48px;border:1px solid rgba(255,255,255,.04);}
+.contact-form h3{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:.06em;margin-bottom:36px;}
+.form-group{margin-bottom:28px;}
+.form-label{display:block;font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;}
+.form-input,.form-textarea,.form-select{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.12);padding:10px 0;font-size:14px;font-family:'Noto Sans TC',sans-serif;color:var(--white);outline:none;transition:border-color .3s;appearance:none;}
+.form-select option{background:var(--black);}
+.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--warm);}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,.2);}
+.form-textarea{resize:none;height:80px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+
+/* FOOTER */
+footer{background:var(--card);border-top:1px solid rgba(255,255,255,.06);padding:40px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.1em;color:var(--white);}
+.footer-logo em{color:var(--warm);font-style:normal;}
+.footer-brands{display:flex;gap:24px;}
+.footer-brand{font-size:11px;letter-spacing:.15em;color:var(--mid);}
+.footer-note{font-size:11px;color:rgba(248,246,241,.2);letter-spacing:.05em;}
+
+/* ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 24px;}.nav-links,.nav-cta{display:none;}
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-left{padding:100px 24px 48px;}
+  .hero-right{height:300px;}
+  section{padding:60px 24px;}
+  .brands-grid,.products-grid,.pricing-layout,.contact-grid{grid-template-columns:1fr;}
+  .form-grid{grid-template-columns:1fr;}
+  footer{padding:32px 24px;}
+  .process-item{grid-template-columns:1fr;gap:12px;}
+  .process-num{font-size:40px;}
+  .process-arrow{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="#" class="nav-logo">ㄅㄆㄇㄈ<em>童裝</em></a>
+  <ul class="nav-links">
+    <li><a href="#brands">品牌</a></li>
+    <li><a href="#products">商品</a></li>
+    <li><a href="#process">代購流程</a></li>
+    <li><a href="#pricing">費用</a></li>
+    <li><a href="#contact">聯絡</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">立即詢問</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">台灣代購 · 正品保證</p>
+    <h1 class="hero-title">
+      <span class="line-sm">小朋友的</span>
+      <span class="line-lg">STYLE</span>
+      <span class="line-lg">不將就</span>
+    </h1>
+    <p class="hero-desc">
+      Nike、Jordan、Levi's、Converse<br>
+      四大品牌童裝一站代購，<br>
+      幫你找到最難買、最搶手的款式。
+    </p>
+    <div class="hero-btns">
+      <a href="#brands" class="btn btn-primary">瀏覽品牌</a>
+      <a href="#contact" class="btn btn-outline">傳 LINE 詢問</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg-text">KIDS</div>
+    <div class="brands-showcase">
+      <div class="brand-row">
+        <span class="brand-name">NIKE</span>
+        <span class="brand-divider"></span>
+        <span class="brand-name">JORDAN</span>
+      </div>
+      <div class="brand-row">
+        <span class="brand-name">LEVI'S</span>
+        <span class="brand-divider"></span>
+        <span class="brand-name">CONVERSE</span>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">4</span><span class="stat-label">代購品牌</span></div>
+      <div class="stat"><span class="stat-num">100%</span><span class="stat-label">正品保證</span></div>
+      <div class="stat"><span class="stat-num">2H</span><span class="stat-label">快速回覆</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section id="brands">
+  <div class="fade-in">
+    <p class="section-tag">品牌介紹</p>
+    <h2 class="section-title">四大品牌 一次搞定</h2>
+  </div>
+  <div class="brands-grid">
+    <div class="brand-card nike fade-in">
+      <p class="brand-card-label">運動潮流 · 童裝首選</p>
+      <h3 class="brand-card-name">NIKE</h3>
+      <p class="brand-card-desc">全球最大運動品牌，童裝版型舒適、機能強大，從日常穿搭到運動訓練都適合。</p>
+      <div class="brand-card-items">
+        <span class="tag">T-Shirt</span><span class="tag">帽T</span><span class="tag">外套</span><span class="tag">短褲</span><span class="tag">運動褲</span>
+      </div>
+    </div>
+    <div class="brand-card jordan fade-in">
+      <p class="brand-card-label">籃球傳奇 · 潮流經典</p>
+      <h3 class="brand-card-name">JORDAN</h3>
+      <p class="brand-card-desc">以飛人 Jordan 為靈魂，童裝系列融合街頭潮流與運動精神，讓孩子充滿個性。</p>
+      <div class="brand-card-items">
+        <span class="tag">連帽衫</span><span class="tag">T-Shirt</span><span class="tag">運動褲</span><span class="tag">Jumpsuit</span>
+      </div>
+    </div>
+    <div class="brand-card levis fade-in">
+      <p class="brand-card-label">丹寧經典 · 百搭耐穿</p>
+      <h3 class="brand-card-name">LEVI'S</h3>
+      <p class="brand-card-desc">超過百年歷史的牛仔褲始祖，童裝系列保留品牌DNA，穿搭簡單卻充滿質感。</p>
+      <div class="brand-card-items">
+        <span class="tag">牛仔褲</span><span class="tag">牛仔外套</span><span class="tag">T-Shirt</span><span class="tag">連身衣</span>
+      </div>
+    </div>
+    <div class="brand-card converse fade-in">
+      <p class="brand-card-label">街頭時尚 · 永不過時</p>
+      <h3 class="brand-card-name">CONVERSE</h3>
+      <p class="brand-card-desc">Chuck Taylor 已成為文化符號，童裝系列從嬰兒到大童都有，搭配任何造型都好看。</p>
+      <div class="brand-card-items">
+        <span class="tag">上衣</span><span class="tag">連帽衫</span><span class="tag">帽子</span><span class="tag">配件</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="fade-in">
+    <p class="section-tag">熱門商品</p>
+    <h2 class="section-title">搶手款式 幫你代購</h2>
+  </div>
+  <div class="products-grid">
+    <div class="product-card fade-in">
+      <div class="product-card-img">
+        <div class="product-icon">NK</div>
+        <span class="product-emoji">👕</span>
+        <span class="product-badge">熱銷</span>
+      </div>
+      <div class="product-card-body">
+        <p class="product-brand">Nike Kids</p>
+        <p class="product-name">Sportswear Club Tee</p>
+        <p class="product-sub">棉質舒適｜多色可選</p>
+        <div class="product-footer">
+          <p class="product-price">680 <span>NT$ 起</span></p>
+          <div class="product-sizes"><span class="size">XS</span><span class="size">S</span><span class="size">M</span><span class="size">L</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="product-card fade-in">
+      <div class="product-card-img">
+        <div class="product-icon">NK</div>
+        <span class="product-emoji">🧥</span>
+        <span class="product-badge">新款</span>
+      </div>
+      <div class="product-card-body">
+        <p class="product-brand">Nike Kids</p>
+        <p class="product-name">Club Fleece Pullover Hoodie</p>
+        <p class="product-sub">刷毛保暖｜男女童款</p>
+        <div class="product-footer">
+          <p class="product-price">1,280 <span>NT$ 起</span></p>
+          <div class="product-sizes"><span class="size">XS</span><span class="size">S</span><span class="size">M</span><span class="size">L</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="product-card fade-in">
+      <div class="product-card-img">
+        <div class="product-icon">JD</div>
+        <span class="product-emoji">🏀</span>
+        <span class="product-badge">限量</span>
+      </div>
+      <div class="product-card-body">
+        <p class="product-brand">Jordan Kids</p>
+        <p class="product-name">Jumpman Logo Hoodie</p>
+        <p class="product-sub">飛人Logo｜街頭必備</p>
+        <div class="product-footer">
+          <p class="product-price">1,580 <span>NT$ 起</span></p>
+          <div class="product-sizes"><span class="size">S</span><span class="size">M</span><span class="size">L</span><span class="size">XL</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="product-card fade-in">
+      <div class="product-card-img">
+        <div class="product-icon">LV</div>
+        <span class="product-emoji">👖</span>
+      </div>
+      <div class="product-card-body">
+        <p class="product-brand">Levi's Kids</p>
+        <p class="product-name">510 Skinny Fit Jeans</p>
+        <p class="product-sub">經典丹寧｜彈性舒適</p>
+        <div class="product-footer">
+          <p class="product-price">1,080 <span>NT$ 起</span></p>
+          <div class="product-sizes"><span class="size">4T</span><span class="size">5</span><span class="size">6</span><span class="size">7</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="product-card fade-in">
+      <div class="product-card-img">
+        <div class="product-icon">CV</div>
+        <span class="product-emoji">⭐</span>
+      </div>
+      <div class="product-card-body">
+        <p class="product-brand">Converse Kids</p>
+        <p class="product-name">Chuck Taylor Graphic Tee</p>
+        <p class="product-sub">星星Logo印花｜百搭款</p>
+        <div class="product-footer">
+          <p class="product-price">680 <span>NT$ 起</span></p>
+          <div class="product-sizes"><span class="size">XS</span><span class="size">S</span><span class="size">M</span><span class="size">L</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="product-card fade-in">
+      <div class="product-card-img" style="background:linear-gradient(135deg,#1e1c1a,#2e2a26);">
+        <div class="product-icon" style="color:rgba(184,154,120,.12);font-size:40px;">找不到<br>的款？</div>
+        <span class="product-emoji">🔍</span>
+      </div>
+      <div class="product-card-body">
+        <p class="product-brand">客製代尋</p>
+        <p class="product-name">找不到喜歡的款式？</p>
+        <p class="product-sub">傳給我款式名稱或圖片，我幫你確認</p>
+        <div class="product-footer">
+          <a href="#contact" class="btn btn-outline" style="font-size:10px;padding:8px 18px;">傳 LINE 詢問</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="fade-in">
+    <p class="section-tag">代購流程</p>
+    <h2 class="section-title">四步驟 輕鬆下單</h2>
+  </div>
+  <div class="process-steps">
+    <div class="process-item fade-in">
+      <div class="process-num">01</div>
+      <div>
+        <p class="process-title">傳訊詢問</p>
+        <p class="process-desc">透過 LINE 傳送想要的品牌、款式名稱或商品圖片，告訴我孩子的年齡或尺寸，我幫你確認是否有貨。</p>
+      </div>
+      <span class="process-arrow">→</span>
+    </div>
+    <div class="process-item fade-in">
+      <div class="process-num">02</div>
+      <div>
+        <p class="process-title">確認報價</p>
+        <p class="process-desc">確認商品售價＋服務費報價，同意後先付 50% 訂金，我即刻幫你搶購，熱門款不怕斷貨。</p>
+      </div>
+      <span class="process-arrow">→</span>
+    </div>
+    <div class="process-item fade-in">
+      <div class="process-num">03</div>
+      <div>
+        <p class="process-title">下單採購</p>
+        <p class="process-desc">收到訂金後立即下單，全程同步進度，提供購買截圖作為正品憑證，讓你買得安心。</p>
+      </div>
+      <span class="process-arrow">→</span>
+    </div>
+    <div class="process-item fade-in">
+      <div class="process-num">04</div>
+      <div>
+        <p class="process-title">到貨寄送</p>
+        <p class="process-desc">商品到手後拍照確認品項，付清尾款即安排宅配，附上物流單號方便追蹤，安心等收貨。</p>
+      </div>
+      <span class="process-arrow">✓</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="fade-in">
+    <p class="section-tag">費用說明</p>
+    <h2 class="section-title">透明報價 沒有隱藏費用</h2>
+  </div>
+  <div class="pricing-layout">
+    <div>
+      <div class="pricing-table fade-in">
+        <div class="pricing-row"><span class="pr-label">商品售價</span><span class="pr-val">依實際售價</span></div>
+        <div class="pricing-row"><span class="pr-label">代購服務費</span><span class="pr-val">10%</span></div>
+        <div class="pricing-row"><span class="pr-label">國內宅配運費</span><span class="pr-val">NT$ 100</span></div>
+        <div class="pricing-row pricing-highlight-row"><span class="pr-label">訂金比例（下單時付）</span><span class="pr-val">50%</span></div>
+      </div>
+      <div class="pricing-notes fade-in">
+        <div class="note-item">下單前提供完整報價明細，確認後再付款</div>
+        <div class="note-item">同批訂單滿 3 件，宅配運費免收</div>
+        <div class="note-item">商品若斷貨，訂金全額退還，不收費用</div>
+        <div class="note-item">附購買截圖，100% 保證正品</div>
+      </div>
+    </div>
+    <div class="pricing-right fade-in">
+      <p class="pr-right-tag">為什麼選擇我們</p>
+      <h3 class="pr-right-title">正品保證<br>買好買滿</h3>
+      <div class="guarantee-list">
+        <div class="g-item">正規通路購買，附購買截圖</div>
+        <div class="g-item">絕不販售仿冒品</div>
+        <div class="g-item">斷貨全額退訂金</div>
+        <div class="g-item">全程 LINE 即時溝通</div>
+      </div>
+      <a href="#contact" class="btn btn-primary" style="align-self:flex-start;">立即詢問報價</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="fade-in">
+    <p class="section-tag">聯絡 / 下單</p>
+    <h2 class="section-title">準備好了嗎 來找我吧</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info fade-in">
+      <h3>傳 LINE<br>最快速</h3>
+      <p class="subtitle">有任何問題、想找特定款式，<br>直接傳 LINE 給我，通常 2 小時內回覆。</p>
+      <div class="info-block">
+        <p class="info-label">回覆時間</p>
+        <p class="info-value">平日 10:00 – 22:00</p>
+        <p class="info-sub">假日稍慢，請耐心等候</p>
+      </div>
+      <div class="info-block">
+        <p class="info-label">到貨時間</p>
+        <p class="info-value">約 3 – 7 個工作天</p>
+        <p class="info-sub">視商品庫存狀況而定</p>
+      </div>
+      <div class="info-block">
+        <p class="info-label">付款方式</p>
+        <p class="info-value">匯款 / 轉帳</p>
+        <p class="info-sub">下單前 50% 訂金，到貨前付尾款</p>
+      </div>
+      <a href="https://line.me/ti/p/~your_line_id" class="line-cta" target="_blank">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.105.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        加 LINE 立即詢問
+      </a>
+    </div>
+    <div class="contact-form fade-in">
+      <h3>快速詢問表單</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">你的名字</label>
+          <input type="text" class="form-input" placeholder="王小明">
+        </div>
+        <div class="form-group">
+          <label class="form-label">LINE ID</label>
+          <input type="text" class="form-input" placeholder="@yourlineid">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">品牌</label>
+        <select class="form-select">
+          <option value="">請選擇品牌</option>
+          <option>Nike Kids</option>
+          <option>Jordan Kids</option>
+          <option>Levi's Kids</option>
+          <option>Converse Kids</option>
+          <option>多個品牌</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">想詢問的商品</label>
+        <input type="text" class="form-input" placeholder="例：Jordan Jumpman 帽T，黑色，尺寸 M（約6-7歲）">
+      </div>
+      <div class="form-group">
+        <label class="form-label">孩子年齡 / 身高體重（幫助選尺寸）</label>
+        <input type="text" class="form-input" placeholder="例：6歲，身高 115cm，體重 20kg">
+      </div>
+      <div class="form-group">
+        <label class="form-label">其他備注</label>
+        <textarea class="form-textarea" placeholder="任何其他需求或問題…"></textarea>
+      </div>
+      <button class="btn btn-primary" style="width:100%;" onclick="alert('表單已送出！我們將盡快透過 LINE 聯繫你 ✓')">送出詢問</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">ㄅㄆㄇㄈ<em>童裝</em></div>
+  <div class="footer-brands">
+    <span class="footer-brand">NIKE</span>
+    <span class="footer-brand">JORDAN</span>
+    <span class="footer-brand">LEVI'S</span>
+    <span class="footer-brand">CONVERSE</span>
+  </div>
+  <p class="footer-note">© 2025 ㄅㄆㄇㄈ童裝代購｜正品保證</p>
+</footer>
+
+<script>
+// Cursor
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function animateRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animateRing);})();
+document.querySelectorAll('a,button,.brand-card,.product-card,.process-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='20px';cursor.style.height='20px';ring.style.width='56px';ring.style.height='56px';});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='12px';cursor.style.height='12px';ring.style.width='36px';ring.style.height='36px';});
+});
+
+// Scroll reveal
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*100);obs.unobserve(e.target);}});
+},{threshold:0.08});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
